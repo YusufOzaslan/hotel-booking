@@ -6,7 +6,7 @@ import styles from "./styles";
 const ManageHotelScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Profile Screen</Text>
+      <Text>Manage Screen</Text>
       {/* Profil içeriği buraya eklenebilir */}
     </SafeAreaView>
   );

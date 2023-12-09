@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -8,9 +8,37 @@ import EditProfileScreen from "../screens/EditProfile/EditProfileScreen";
 import ReservationsScreen from "../screens/Reservations/ReservationsScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
+import LoginScreen from "../screens/Login/LoginScreen";
+import { useAuth } from "../context/AuthContext";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const LoginStack = createStackNavigator();
+
+function LoginLayout() {
+  const { login } = useAuth();
+  return (
+    <LoginStack.Navigator>
+      {login ? (
+        <LoginStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      ) : (
+        <LoginStack.Screen
+          name="Inside"
+          component={TabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
+    </LoginStack.Navigator>
+  );
+}
 
 const ProfileStack = () => {
   return (
@@ -59,7 +87,7 @@ const TabNavigator = () => {
 const AppContainer = () => {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <LoginLayout />
     </NavigationContainer>
   );
 };
