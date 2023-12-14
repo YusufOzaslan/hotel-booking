@@ -1,5 +1,3 @@
-// styles.js
-
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -12,6 +10,12 @@ const styles = StyleSheet.create({
   keyboardAvoiding: {
     flex: 1,
     justifyContent: "center",
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "white",
   },
   title: {
     fontSize: 32,

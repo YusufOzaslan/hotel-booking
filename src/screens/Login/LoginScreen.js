@@ -2,78 +2,75 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
   Button,
+  View,
+  Text,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import styles from "./styles";
-import database from "../../data/Database";
-import { useAuth } from "../../context/AuthContext";
+import { auth } from "../../../firebase";
 
-const LoginScreen = () => {
-  const { login, setLogin, user, setUser } = useAuth();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+const LoginScreen = ({ navigation }) => {
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let [loading, setLoading] = useState(false);
+  let [errorMessage, setErrorMessage] = useState("");
 
   const signIn = async () => {
-    setLoading(true);
-    setLogin(false);
-    /*
-    // SQLite veritabanından kullanıcıyı sorgula
-    database.getUsers((users) => {
-      const user = users.find(
-        (u) => u.email === email && u.password === password
-      );
-
-      if (user) {
-        // Kullanıcı bulundu, giriş başarılı
-        console.log("Giriş başarılı:", user);
-        // Kullanıcının oturum durumunu güncelle
-        login(user);
-        // Giriş yaptıktan sonra başka bir sayfaya yönlendirme yap
-        navigation.navigate("HomeScreen");
-      } else {
-        // Kullanıcı bulunamadı, giriş başarısız
-        console.log("Giriş başarısız");
-      }
-    });*/
-
-    setLoading(false);
+    if (email !== "" && password !== "") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          //navigation.navigate("Inside", { user: userCredential.user });
+          navigation.navigate("Inside");
+          setErrorMessage("");
+          setEmail("");
+          setPassword("");
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+    } else {
+      setErrorMessage("Please enter an email and password");
+    }
   };
 
   const signUp = async () => {
-    setLoading(true);
-    setLoading(false);
+    navigation.navigate("SignUp");
   };
   return (
-    <SafeAreaView>
-      <KeyboardAvoidingView behavior="padding">
-        <TextInput
-          value={email}
-          style={styles.input}
-          placeholder="Email"
-          autoCapitalize="none"
-          onChangeText={(text) => setEmail()}
-        ></TextInput>
-        <TextInput
-          secureTextEntry={true}
-          value={password}
-          style={styles.input}
-          placeholder="Password"
-          autoCapitalize="none"
-          onChangeText={(text) => setPassword()}
-        ></TextInput>
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <>
-            <Button title="Login" onPress={signIn} />
-            <Button title="Create account" onPress={signIn} />
-          </>
-        )}
-      </KeyboardAvoidingView>
+    <SafeAreaView style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={styles.keyboardAvoiding}>
+          <Text style={styles.title}>Welcome</Text>
+          <TextInput
+            value={email}
+            style={styles.input}
+            placeholder="Email"
+            autoCapitalize="none"
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            secureTextEntry={true}
+            value={password}
+            style={styles.input}
+            placeholder="Password"
+            autoCapitalize="none"
+            onChangeText={(text) => setPassword(text)}
+          />
+          {loading ? (
+            <ActivityIndicator size="large" color="#ffffff" />
+          ) : (
+            <View>
+              <Button title="Login" onPress={signIn} color="#2F4F4F" />
+              <Button title="SignUp" onPress={signUp} color="#0F2F0F" />
+            </View>
+          )}
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };

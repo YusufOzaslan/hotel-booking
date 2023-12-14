@@ -1,31 +1,31 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth, db } from "../../../firebase";
+import { signOut } from "firebase/auth";
 import styles from "./styles";
-import { useAuth } from "../../context/AuthContext";
 
 const ProfileScreen = ({ navigation }) => {
-  const { login, setLogin, user, setUser } = useAuth();
-
   const goToEditProfile = () => {
     navigation.navigate("EditProfile");
   };
 
-  const goToReservations = () => {
-    navigation.navigate("Reservations");
+  const goToBookings = () => {
+    navigation.navigate("AccommodationScreen");
+  };
+
+  let logout = () => {
+    signOut(auth).then(() => {
+      navigation.popToTop();
+    });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Buraya profil bilgilerini göstermek için gerekli component'leri ekleyebilirsiniz */}
       <Button title="Edit Profile" onPress={goToEditProfile} />
-      <Button title="View Reservations" onPress={goToReservations} />
-      <Button
-        title="Logout"
-        onPress={() => {
-          setLogin(true);
-        }}
-      />
+      <Button title="Accommodation" onPress={goToBookings} />
+      <Button title="Logout" onPress={logout} />
     </SafeAreaView>
   );
 };

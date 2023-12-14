@@ -5,37 +5,48 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import ProfileScreen from "../screens/Profile/ProfileScreen";
 import EditProfileScreen from "../screens/EditProfile/EditProfileScreen";
-import ReservationsScreen from "../screens/Reservations/ReservationsScreen";
+import AccommodationScreen from "../screens/Accommodation/AccommodationScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
-import { useAuth } from "../context/AuthContext";
+import SignUp from "../screens/SignUp/SignUp";
+
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
 
 function LoginLayout() {
-  const { login } = useAuth();
   return (
     <LoginStack.Navigator>
-      {login ? (
-        <LoginStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-      ) : (
-        <LoginStack.Screen
-          name="Inside"
-          component={TabNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-      )}
+      <LoginStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <LoginStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          title: "SignUp",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <LoginStack.Screen
+        name="Inside"
+        component={TabNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
     </LoginStack.Navigator>
   );
 }
@@ -47,23 +58,54 @@ const ProfileStack = () => {
         name="ProfileStack"
         component={ProfileScreen}
         options={{
-          headerShown: false, // Bu satırı ekleyerek başlık çubuğunu gizleyin
+          title: "Profile",
+          headerShown: false,
         }}
       />
-      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-      <Stack.Screen name="Reservations" component={ReservationsScreen} />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          title: "Edit Profile",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="AccommodationScreen"
+        component={AccommodationScreen}
+        options={{
+          title: "Accommodation",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: "#1a1a1a",
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false, // Bu satırı ekleyerek başlık çubuğunu gizleyin
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Fontisto name="home" size={24} color="#2F4F4F" />
+            ) : (
+              <SimpleLineIcons name="home" size={24} color="#2F4F4F" />
+            ),
         }}
       />
       <Tab.Screen
@@ -71,13 +113,25 @@ const TabNavigator = () => {
         component={ManageHotelScreen}
         options={{
           headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
+            ) : (
+              <Fontisto name="hotel" size={24} color="#2F4F4F" />
+            ),
         }}
       />
       <Tab.Screen
-        name="ProfileTab"
+        name="Profile"
         component={ProfileStack}
         options={{
           headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="person" size={24} color="#2F4F4F" />
+            ) : (
+              <Ionicons name="person-outline" size={24} color="#2F4F4F" />
+            ),
         }}
       />
     </Tab.Navigator>
