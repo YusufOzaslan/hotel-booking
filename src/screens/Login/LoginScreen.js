@@ -8,7 +8,7 @@ import {
   View,
   Text,
 } from "react-native";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import styles from "./styles";
@@ -32,9 +32,11 @@ const LoginScreen = ({ navigation }) => {
         })
         .catch((error) => {
           setErrorMessage(error.message);
+          alert(errorMessage);
         });
     } else {
       setErrorMessage("Please enter an email and password");
+      alert(errorMessage);
     }
   };
 
