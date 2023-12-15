@@ -10,6 +10,8 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
 import SignUp from "../screens/SignUp/SignUp";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
@@ -19,6 +21,26 @@ import { FontAwesome5 } from "@expo/vector-icons";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
+
+const getUserRole = async () => {
+  const userUid = auth.currentUser.uid;
+  const userDocRef = doc(db, "hotel-booking-app", userUid);
+  try {
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      const userRole = userDocSnap.data().rol;
+      return userRole;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+    return null;
+  }
+};
+
+//const userRole = await getUserRole();
 
 function LoginLayout() {
   return (
@@ -86,7 +108,7 @@ const ProfileStack = () => {
   );
 };
 
-const TabNavigator = () => {
+const TabNavigator = async  () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -108,19 +130,21 @@ const TabNavigator = () => {
             ),
         }}
       />
-      <Tab.Screen
-        name="Manage Hotel"
-        component={ManageHotelScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
-            ) : (
-              <Fontisto name="hotel" size={24} color="#2F4F4F" />
-            ),
-        }}
-      />
+      {getUserRole() === "hotelOwner" && (
+        <Tab.Screen
+          name="Manage Hotel"
+          component={ManageHotelScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
+              ) : (
+                <Fontisto name="hotel" size={24} color="#2F4F4F" />
+              ),
+          }}
+        />
+      )}
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
