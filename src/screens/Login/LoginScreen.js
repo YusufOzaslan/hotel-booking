@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [loading, setLoading] = useState(false);
-  let [errorMessage, setErrorMessage] = useState("");
+  let [errorMessage, setErrorMessage] = useState("error");
 
   const signIn = async () => {
     if (email !== "" && password !== "") {

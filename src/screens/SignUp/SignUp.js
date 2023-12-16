@@ -20,7 +20,6 @@ import styles from "./styles";
 const SignUp = ({ navigation }) => {
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
-  let [validationMessage, setValidationMessage] = React.useState("");
   let [role, setRole] = React.useState("guest");
 
   let signUp = () => {
@@ -35,8 +34,7 @@ const SignUp = ({ navigation }) => {
         navigation.navigate("Inside");
       })
       .catch((error) => {
-        setValidationMessage(error.message);
-        alert(validationMessage);
+        alert(error.message);
       });
   };
 
@@ -64,8 +62,8 @@ const SignUp = ({ navigation }) => {
             onValueChange={(itemValue) => setRole(itemValue)}
             style={styles.input}
           >
-            <Picker.Item label="Guest" value="guest" />
-            <Picker.Item label="Hotel Owner" value="hotelOwner" />
+            <Picker.Item key="guest" label="Guest" value="guest" />
+            <Picker.Item key="hotelOwner" label="Hotel Owner" value="hotelOwner" />
           </Picker>
           <Button title="Sign Up" onPress={signUp} color="#0F2F0F" />
         </KeyboardAvoidingView>
