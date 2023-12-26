@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,7 +10,7 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
 import SignUp from "../screens/SignUp/SignUp";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -22,25 +22,85 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
 
-const getUserRole = async () => {
-  const userUid = auth.currentUser.uid;
-  const userDocRef = doc(db, "hotel-booking-app", userUid);
-  try {
-    const userDocSnap = await getDoc(userDocRef);
+const TabNavigator = () => {
+  const [userRole, setUserRole] = useState(null);
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const userId = auth.currentUser.uid;
+        const userQuery = query(
+          collection(db, "hotel-booking-app"),
+          where("userId", "==", userId)
+        );
+        const querySnapshot = await getDocs(userQuery);
 
-    if (userDocSnap.exists()) {
-      const userRole = userDocSnap.data().rol;
-      return userRole;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error("Error:", error.message);
-    return null;
-  }
+        if (!querySnapshot.empty) {
+          // Assuming there's only one document for each user
+          const userDoc = querySnapshot.docs[0].data();
+          setUserRole(userDoc.role);
+        } else {
+          // Handle the case where the user document is not found
+        }
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+      }
+    };
+
+    fetchUserRole();
+  }, []); // Empty dependency array ensures the effect runs only once on mount
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: "#1a1a1a",
+        },
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Fontisto name="home" size={24} color="#2F4F4F" />
+            ) : (
+              <SimpleLineIcons name="home" size={24} color="#2F4F4F" />
+            ),
+        }}
+      />
+      {userRole === "hotelOwner" && (
+        <Tab.Screen
+          name="Manage Hotel"
+          component={ManageHotelScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
+              ) : (
+                <Fontisto name="hotel" size={24} color="#2F4F4F" />
+              ),
+          }}
+        />
+      )}
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="person" size={24} color="#2F4F4F" />
+            ) : (
+              <Ionicons name="person-outline" size={24} color="#2F4F4F" />
+            ),
+        }}
+      />
+    </Tab.Navigator>
+  );
 };
-
-//const userRole = await getUserRole();
 
 function LoginLayout() {
   return (
@@ -105,60 +165,6 @@ const ProfileStack = () => {
         }}
       />
     </Stack.Navigator>
-  );
-};
-
-const TabNavigator = async  () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: "#1a1a1a",
-        },
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Fontisto name="home" size={24} color="#2F4F4F" />
-            ) : (
-              <SimpleLineIcons name="home" size={24} color="#2F4F4F" />
-            ),
-        }}
-      />
-      {getUserRole() === "hotelOwner" && (
-        <Tab.Screen
-          name="Manage Hotel"
-          component={ManageHotelScreen}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
-              ) : (
-                <Fontisto name="hotel" size={24} color="#2F4F4F" />
-              ),
-          }}
-        />
-      )}
-      <Tab.Screen
-        name="Profile"
-        component={ProfileStack}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Ionicons name="person" size={24} color="#2F4F4F" />
-            ) : (
-              <Ionicons name="person-outline" size={24} color="#2F4F4F" />
-            ),
-        }}
-      />
-    </Tab.Navigator>
   );
 };
 

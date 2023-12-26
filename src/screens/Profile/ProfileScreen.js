@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { auth, db } from "../../../firebase";
 import { signOut } from "firebase/auth";
@@ -14,7 +14,7 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("AccommodationScreen");
   };
 
-  let logout = () => {
+  const logout = () => {
     signOut(auth).then(() => {
       navigation.popToTop();
     });
@@ -22,10 +22,19 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Buraya profil bilgilerini göstermek için gerekli component'leri ekleyebilirsiniz */}
-      <Button title="Edit Profile" onPress={goToEditProfile} />
-      <Button title="Accommodation" onPress={goToBookings} />
-      <Button title="Logout" onPress={logout} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={goToEditProfile}>
+          <Text style={styles.buttonText}>Edit Profile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={goToBookings}>
+          <Text style={styles.buttonText}>Accommodation</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={logout}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

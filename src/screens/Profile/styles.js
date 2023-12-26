@@ -7,10 +7,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333333",
   },
-  headerText: {
-    fontSize: 24,
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#2F4F4F",
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+    width: 200,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 20,
+    textAlign: "center",
   },
 });
+
 export default styles;
