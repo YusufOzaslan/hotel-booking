@@ -9,6 +9,8 @@ import AccommodationScreen from "../screens/Accommodation/AccommodationScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
+import HotelScreen from "../screens/Hotel/HotelScreen";
+import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
 import SignUp from "../screens/SignUp/SignUp";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
@@ -18,9 +20,11 @@ import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const Stack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const ManageHotelStack = createStackNavigator();
 
 const TabNavigator = () => {
   const [userRole, setUserRole] = useState(null);
@@ -54,12 +58,14 @@ const TabNavigator = () => {
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "#1a1a1a",
+          borderBottomColor: "transparent",
+          shadowColor: "transparent",
         },
       }}
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeLayout}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) =>
@@ -73,7 +79,7 @@ const TabNavigator = () => {
       {userRole === "hotelOwner" && (
         <Tab.Screen
           name="Manage Hotel"
-          component={ManageHotelScreen}
+          component={ManageHotelLayout}
           options={{
             headerShown: false,
             tabBarIcon: ({ focused }) =>
@@ -87,7 +93,7 @@ const TabNavigator = () => {
       )}
       <Tab.Screen
         name="Profile"
-        component={ProfileStack}
+        component={ProfileLayout}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) =>
@@ -101,8 +107,7 @@ const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
-
-function LoginLayout() {
+const LoginLayout = () => {
   return (
     <LoginStack.Navigator>
       <LoginStack.Screen
@@ -131,12 +136,54 @@ function LoginLayout() {
       />
     </LoginStack.Navigator>
   );
-}
-
-const ProfileStack = () => {
+};
+const HomeLayout = () => {
   return (
-    <Stack.Navigator initialRouteName="ProfileStack">
-      <Stack.Screen
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="HotelScreen"
+        component={HotelScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+};
+const ManageHotelLayout = () => {
+  return (
+    <ManageHotelStack.Navigator>
+      <ManageHotelStack.Screen
+        name="ManageHotelScreen"
+        component={ManageHotelScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="AddHotelScreen"
+        component={AddHotelScreen}
+        options={{
+          title: "Add Hotel",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+    </ManageHotelStack.Navigator>
+  );
+};
+const ProfileLayout = () => {
+  return (
+    <ProfileStack.Navigator initialRouteName="ProfileStack">
+      <ProfileStack.Screen
         name="ProfileStack"
         component={ProfileScreen}
         options={{
@@ -144,7 +191,7 @@ const ProfileStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <ProfileStack.Screen
         name="EditProfile"
         component={EditProfileScreen}
         options={{
@@ -154,7 +201,7 @@ const ProfileStack = () => {
           },
         }}
       />
-      <Stack.Screen
+      <ProfileStack.Screen
         name="AccommodationScreen"
         component={AccommodationScreen}
         options={{
@@ -164,7 +211,7 @@ const ProfileStack = () => {
           },
         }}
       />
-    </Stack.Navigator>
+    </ProfileStack.Navigator>
   );
 };
 

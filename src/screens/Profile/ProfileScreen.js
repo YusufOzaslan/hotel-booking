@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { auth, db } from "../../../firebase";
@@ -6,6 +6,18 @@ import { signOut } from "firebase/auth";
 import styles from "./styles";
 
 const ProfileScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerLeft: () => null,
+      title: "My Profile",
+      headerStyle: {
+        backgroundColor: "#2F4F4F",
+        borderBottomColor: "transparent",
+        shadowColor: "transparent",
+      },
+    });
+  });
   const goToEditProfile = () => {
     navigation.navigate("EditProfile");
   };

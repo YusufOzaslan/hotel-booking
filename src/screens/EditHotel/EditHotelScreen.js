@@ -2,12 +2,11 @@ import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 
-const EditProfileScreen = ({ navigation }) => {
-  
+const EditHotelScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>edit profile</Text>
+      <Text>EditHotelScreen</Text>
     </SafeAreaView>
   );
 };
-export default EditProfileScreen;
+export default EditHotelScreen;
