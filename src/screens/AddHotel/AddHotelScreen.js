@@ -33,6 +33,10 @@ const AddHotelScreen = ({ navigation }) => {
     }
   };
 
+  const handleAddRoom = () => {
+    console.log("Add Room button pressed");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -49,7 +53,11 @@ const AddHotelScreen = ({ navigation }) => {
           value={city}
           onChangeText={(text) => setCity(text)}
         />
-        {/* Diğer otel özelliklerini ekleyebilirsiniz */}
+
+        <TouchableOpacity style={styles.addRoomButton} onPress={handleAddRoom}>
+          <Text style={styles.addRoomButtonLabel}>Add Room</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.addButton} onPress={handleAddHotel}>
           <Text style={styles.addButtonLabel}>Add Hotel</Text>
         </TouchableOpacity>

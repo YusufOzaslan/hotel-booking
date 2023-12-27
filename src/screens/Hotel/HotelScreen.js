@@ -40,6 +40,7 @@ const HotelScreen = ({ navigation, route }) => {
             id: doc.id,
             description: data.description,
             price: data.price,
+            roomName: data.roomName,
             // Diğer oda özelliklerini ekleyebilirsiniz
           });
         });
@@ -77,10 +78,21 @@ const HotelScreen = ({ navigation, route }) => {
         <FlatList
           data={rooms}
           renderItem={({ item }) => (
-            <View style={styles.roomItem}>
+            <TouchableOpacity
+              style={styles.roomItem}
+              onPress={() => {
+                // Odaya tıklandığında RoomScreen'e git
+                navigation.navigate("RoomScreen", {
+                  roomId: item.id,
+                  hotelId,
+                  hotelName,
+                  roomName: item.roomName,
+                });
+              }}
+            >
               <Text style={styles.roomDescription}>{item.description}</Text>
               <Text style={styles.roomPrice}>Price: {item.price}</Text>
-            </View>
+            </TouchableOpacity>
           )}
           keyExtractor={(item) => item.id}
         />

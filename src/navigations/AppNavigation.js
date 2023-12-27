@@ -10,7 +10,10 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
 import HotelScreen from "../screens/Hotel/HotelScreen";
+import RoomScreen from "../screens/Room/RoomScreen";
 import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
+import EditHotelScreen from "../screens/EditHotel/EditHotelScreen";
+import EditRoomScreen from "../screens/EditRoom/EditRoomScreen";
 import SignUp from "../screens/SignUp/SignUp";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
@@ -33,7 +36,7 @@ const TabNavigator = () => {
       try {
         const userId = auth.currentUser.uid;
         const userQuery = query(
-          collection(db, "hotel-booking-app"),
+          collection(db, "users"),
           where("userId", "==", userId)
         );
         const querySnapshot = await getDocs(userQuery);
@@ -154,6 +157,13 @@ const HomeLayout = () => {
           headerShown: false,
         }}
       />
+      <HomeStack.Screen
+        name="RoomScreen"
+        component={RoomScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </HomeStack.Navigator>
   );
 };
@@ -172,6 +182,23 @@ const ManageHotelLayout = () => {
         component={AddHotelScreen}
         options={{
           title: "Add Hotel",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="EditHotelScreen"
+        component={EditHotelScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="EditRoomScreen"
+        component={EditRoomScreen}
+        options={{
+          title: "Edit Hotel room",
           headerStyle: {
             backgroundColor: "#2F4F4F",
           },

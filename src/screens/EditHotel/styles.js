@@ -7,10 +7,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333333",
   },
-  headerText: {
-    fontSize: 24,
+  roomItem: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#CCCCCC",
+  },
+  roomDescription: {
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 8,
+    color: "#FFFFFF", // Açıklama rengi
+  },
+  roomPrice: {
+    fontSize: 16,
+    color: "#CCCCCC", // Fiyat rengi
   },
 });
+
 export default styles;

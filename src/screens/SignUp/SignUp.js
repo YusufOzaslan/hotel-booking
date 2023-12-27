@@ -27,7 +27,7 @@ const SignUp = ({ navigation }) => {
       .then(async (userCredential) => {
         //sendEmailVerification(auth.currentUser);
         //navigation.navigate("HomeScreen", { user: userCredential.user });
-        await addDoc(collection(db, "hotel-booking-app"), {
+        await addDoc(collection(db, "users"), {
           userId: userCredential.user.uid,
           role: role,
         });

@@ -57,7 +57,7 @@ const ManageHotelScreen = ({ navigation }) => {
   };
 
   const handleHotelPress = (hotelName, hotelId) => {
-    navigation.navigate("HotelScreen", { hotelName, hotelId });
+    navigation.navigate("EditHotelScreen", { hotelName, hotelId });
   };
 
   const renderHotelItem = ({ item }) => (

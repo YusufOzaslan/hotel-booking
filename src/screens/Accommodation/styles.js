@@ -7,10 +7,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333333",
   },
-  headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+  reservationItem: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#CCCCCC",
+  },
+  reservationText: {
+    fontSize: 18,
+    color: "#fff",
   },
 });
+
 export default styles;

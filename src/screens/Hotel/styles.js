@@ -3,14 +3,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#333333",
   },
   roomItem: {
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC",
+    backgroundColor: "#444444", // Oda öğesi arkaplan rengi
   },
   roomDescription: {
     fontSize: 18,
