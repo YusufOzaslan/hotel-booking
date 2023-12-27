@@ -9,11 +9,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   RefreshControl,
+  Image,
 } from "react-native";
 import filter from "lodash.filter";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../../firebase";
+import { collection, query, getDocs } from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../../../firebase";
 import styles from "./styles";
 
 const HomeScreen = ({ navigation }) => {
@@ -22,6 +24,7 @@ const HomeScreen = ({ navigation }) => {
   const [hotels, setHotels] = useState([]);
   const [search, setSearch] = useState("");
   const [fullHotelsData, setFullHotelsData] = useState([]);
+  const [imageURL, setImageURL] = useState(null);
 
   useEffect(() => {
     fetchHotels();
@@ -32,28 +35,34 @@ const HomeScreen = ({ navigation }) => {
       setIsLoading(true);
       const userQuery = query(collection(db, "hotels"));
       const querySnapshot = await getDocs(userQuery);
-      const hotelList = [];
 
-      if (!querySnapshot.empty) {
-        querySnapshot.forEach((doc) => {
+      const hotelList = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
           const data = doc.data();
-          hotelList.push({
-            id: doc.id,
-            name: data.name,
-            city: data.city,
-            // Diğer otel özellikleri eklenebilir
-          });
-        });
+          const imageRef = ref(storage, data.imageURL);
 
-        setHotels(hotelList);
-        setFullHotelsData(hotelList); // Tam veriyi sakla
-        setIsLoading(false);
-      } else {
-        // Handle the case where the user document is not found
-      }
+          try {
+            const imageURL = await getDownloadURL(imageRef);
+            return {
+              id: doc.id,
+              name: data.name,
+              city: data.city,
+              image: imageURL,
+            };
+          } catch (error) {
+            console.log("Error fetching image: ", error);
+            return null; // Eğer resim alınamazsa null döndür
+          }
+        })
+      );
+      const filteredHotelList = hotelList.filter((hotel) => hotel !== null);
+
+      setHotels(filteredHotelList);
+      setFullHotelsData(filteredHotelList);
     } catch (error) {
-      console.error("Error fetching hotels:", error);
+      console.error("Otel bilgileri getirme hatası:", error);
     } finally {
+      setIsLoading(false);
       setRefreshing(false);
     }
   };
@@ -83,6 +92,16 @@ const HomeScreen = ({ navigation }) => {
       style={styles.hotelItem}
       onPress={() => handleHotelPress(item.name, item.id)}
     >
+      <View>
+        {item.image ? (
+          <Image
+            style={{ width: 200, height: 200 }}
+            source={{ uri: item.image }}
+          />
+        ) : (
+          <Text>Loading...</Text>
+        )}
+      </View>
       <Text style={styles.hotelName}>{item.name}</Text>
       <Text style={styles.hotelCity}>{item.city}</Text>
     </TouchableOpacity>
@@ -97,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
     navigation.setOptions({
       headerShown: true,
       headerLeft: () => null,
-      title: "Hotels",
+      title: "Oteller",
       headerStyle: {
         backgroundColor: "#2F4F4F",
         borderBottomColor: "transparent",
@@ -105,6 +124,7 @@ const HomeScreen = ({ navigation }) => {
       },
     });
   });
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -119,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
                 clearButtonMode="always"
                 value={search}
                 onChangeText={(searchText) => handleSearch(searchText)}
-                placeholder="Search Hotel or City"
+                placeholder="Otel veya Şehir Ara"
                 autoFocus={true}
                 style={styles.searchBarInput}
               />

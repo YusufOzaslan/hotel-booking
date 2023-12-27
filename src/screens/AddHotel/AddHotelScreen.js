@@ -21,19 +21,23 @@ const AddHotelScreen = ({ navigation }) => {
       adminUserId: auth.currentUser.uid,
       name: hotelName,
       city: city,
+      imageURL: "gs://hotel-booking-app-cb3f7.appspot.com/hotelImages/m3.jpg",
     };
 
     try {
       // Yeni belgeyi ekleyin
       const docRef = await addDoc(collection(db, "hotels"), newHotel);
       console.log("Document written with ID: ", docRef.id);
-    
+
       // Eklenen belgeyi okuyun
       const addedDoc = await getDoc(docRef);
       const addedData = addedDoc.data();
-    
+
       // İlgili bilgileri kullanarak başka bir ekrana geçiş yapın
-      navigation.navigate("EditHotelScreen", { hotelId: docRef.id, hotelName: addedData.name });
+      navigation.navigate("EditHotelScreen", {
+        hotelId: docRef.id,
+        hotelName: addedData.name,
+      });
     } catch (error) {
       console.error("Error adding hotel: ", error);
     }

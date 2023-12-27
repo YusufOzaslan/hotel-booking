@@ -90,6 +90,7 @@ const HotelScreen = ({ navigation, route }) => {
                 });
               }}
             >
+            <Text style={styles.roomDescription}>{item.roomName}</Text>
               <Text style={styles.roomDescription}>{item.description}</Text>
               <Text style={styles.roomPrice}>Price: {item.price}</Text>
             </TouchableOpacity>
