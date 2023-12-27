@@ -8,7 +8,7 @@ import {
   Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
 import styles from "./styles";
 
@@ -24,17 +24,19 @@ const AddHotelScreen = ({ navigation }) => {
     };
 
     try {
+      // Yeni belgeyi ekleyin
       const docRef = await addDoc(collection(db, "hotels"), newHotel);
       console.log("Document written with ID: ", docRef.id);
-
-      navigation.goBack();
+    
+      // Eklenen belgeyi okuyun
+      const addedDoc = await getDoc(docRef);
+      const addedData = addedDoc.data();
+    
+      // İlgili bilgileri kullanarak başka bir ekrana geçiş yapın
+      navigation.navigate("EditHotelScreen", { hotelId: docRef.id, hotelName: addedData.name });
     } catch (error) {
       console.error("Error adding hotel: ", error);
     }
-  };
-
-  const handleAddRoom = () => {
-    console.log("Add Room button pressed");
   };
 
   return (
@@ -53,11 +55,6 @@ const AddHotelScreen = ({ navigation }) => {
           value={city}
           onChangeText={(text) => setCity(text)}
         />
-
-        <TouchableOpacity style={styles.addRoomButton} onPress={handleAddRoom}>
-          <Text style={styles.addRoomButtonLabel}>Add Room</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={styles.addButton} onPress={handleAddHotel}>
           <Text style={styles.addButtonLabel}>Add Hotel</Text>
         </TouchableOpacity>

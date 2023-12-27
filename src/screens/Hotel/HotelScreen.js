@@ -27,7 +27,7 @@ const HotelScreen = ({ navigation, route }) => {
         // Firebase'den odaları al
         const roomsQuery = query(
           collection(db, "rooms"),
-          where("hotel-Id", "==", hotelId)
+          where("hotelId", "==", hotelId)
         );
 
         const querySnapshot = await getDocs(roomsQuery);

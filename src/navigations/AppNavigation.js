@@ -12,6 +12,7 @@ import LoginScreen from "../screens/Login/LoginScreen";
 import HotelScreen from "../screens/Hotel/HotelScreen";
 import RoomScreen from "../screens/Room/RoomScreen";
 import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
+import AddRoomScreen from "../screens/AddRoom/AddRoomScreen";
 import EditHotelScreen from "../screens/EditHotel/EditHotelScreen";
 import EditRoomScreen from "../screens/EditRoom/EditRoomScreen";
 import SignUp from "../screens/SignUp/SignUp";
@@ -188,6 +189,16 @@ const ManageHotelLayout = () => {
         }}
       />
       <ManageHotelStack.Screen
+        name="AddRoomScreen"
+        component={AddRoomScreen}
+        options={{
+          title: "Add New Room",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <ManageHotelStack.Screen
         name="EditHotelScreen"
         component={EditHotelScreen}
         options={{
@@ -198,7 +209,7 @@ const ManageHotelLayout = () => {
         name="EditRoomScreen"
         component={EditRoomScreen}
         options={{
-          title: "Edit Hotel room",
+          title: "Edit Hotel Room",
           headerStyle: {
             backgroundColor: "#2F4F4F",
           },
