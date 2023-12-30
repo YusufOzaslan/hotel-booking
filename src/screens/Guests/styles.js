@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   deleteButtonContainer: {
     marginTop: 8,
-    alignItems: "flex-end", // Butonu sağ üst köşeye hizalamak için
+    alignItems: "flex-end",
   },
   deleteButton: {
     fontSize: 16,

@@ -1,3 +1,5 @@
+// newStyles.js
+
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -11,31 +13,43 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#FFFFFF",
   },
   searchBarContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 10,
     marginVertical: 10,
     borderRadius: 20,
-    width: "80%", 
+    width: "80%",
   },
   searchBarInput: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     paddingHorizontal: 20,
   },
   hotelItem: {
-    // Otellerin listelendiği öğelerin stili
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 20,
     marginVertical: 8,
     borderRadius: 10,
+    elevation: 3,
+  },
+  hotelPhoto: {
+    width: "100%",
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 8,
   },
   hotelName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#2F4F4F",
+    marginBottom: 8,
   },
   hotelCity: {
     fontSize: 16,
+    color: "#555555",
+    marginBottom: 8,
   },
 });
+
 export default styles;

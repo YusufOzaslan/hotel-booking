@@ -168,13 +168,15 @@ const RoomScreen = ({ navigation, route }) => {
               />
               <View style={styles.datePickerContainer}>
                 <DatePicker
-                  selectedBgColor="#333333"
+                  calendarBgColor="2F4F4F"
+                  selectedBgColor="black"
                   customButton={(onConfirm) => customButton(onConfirm)}
                   onConfirm={(dates) => setSelectedDates(dates)}
                   allowFontScaling={false}
                   placeholder={"Select Your Dates"}
                   mode={"range"}
                   style={styles.datePicker}
+                  markText={"Booking Date"}
                 />
               </View>
               <TouchableOpacity

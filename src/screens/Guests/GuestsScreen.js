@@ -19,7 +19,10 @@ import {
 import { db, auth } from "../../../firebase";
 import styles from "./styles";
 
-const AccommodationScreen = ({ navigation }) => {
+const GuestsScreen = ({ navigation, route }) => {
+  const { hotelId } = route.params || {
+    hotelId: null,
+  };
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +31,7 @@ const AccommodationScreen = ({ navigation }) => {
       try {
         const reservationsQuery = query(
           collection(db, "bookings"),
-          where("userId", "==", auth.currentUser.uid)
+          where("hotelId", "==", hotelId)
         );
 
         const querySnapshot = await getDocs(reservationsQuery);
@@ -92,4 +95,4 @@ const AccommodationScreen = ({ navigation }) => {
   );
 };
 
-export default AccommodationScreen;
+export default GuestsScreen;

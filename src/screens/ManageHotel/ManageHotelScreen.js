@@ -6,10 +6,20 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
+  Image,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { auth, db } from "../../../firebase";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../../firebase";
 import styles from "./styles";
 
 const ManageHotelScreen = ({ navigation }) => {
@@ -19,7 +29,7 @@ const ManageHotelScreen = ({ navigation }) => {
 
   useEffect(() => {
     fetchHotels();
-  }, [refreshing]); // Eğer sadece refreshing durumu değiştiğinde çalışmasını istiyorsanız buraya ekleyebilirsiniz
+  }, [refreshing]);
 
   const fetchHotels = async () => {
     try {
@@ -30,44 +40,86 @@ const ManageHotelScreen = ({ navigation }) => {
         where("adminUserId", "==", userId)
       );
       const querySnapshot = await getDocs(userQuery);
-      const hotelList = [];
 
-      if (!querySnapshot.empty) {
-        querySnapshot.forEach((doc) => {
+      const hotelList = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
           const data = doc.data();
-          hotelList.push({
-            id: doc.id,
-            name: data.name,
-            city: data.city,
-          });
-        });
+          const imageRef = ref(storage, data.imageURL);
 
-        setHotels(hotelList);
-        setIsLoading(false);
-      } else {
-        setHotels([]);
-        setIsLoading(false);
-      }
+          try {
+            const imageURL = await getDownloadURL(imageRef);
+            return {
+              id: doc.id,
+              name: data.name,
+              city: data.city,
+              image: imageURL,
+            };
+          } catch (error) {
+            console.log("Error fetching image: ", error);
+            return null; // Eğer resim alınamazsa null döndür
+          }
+        })
+      );
+
+      setHotels(hotelList);
     } catch (error) {
-      console.error("Error fetching hotels:", error);
-      setIsLoading(false);
+      console.error("Otel bilgileri getirme hatası:", error);
     } finally {
       setRefreshing(false);
+      setIsLoading(false);
+    }
+  };
+  const handleDeleteHotel = async (hotelId) => {
+    try {
+      const hotelRef = doc(db, "hotels", hotelId);
+      await deleteDoc(hotelRef);
+      Alert.alert("Success", "Hotel deleted successfully!");
+      fetchHotels(); // Otelleri güncellemek için fetchHotels'i çağırın
+    } catch (error) {
+      console.error("Error deleting hotel:", error);
     }
   };
 
-  const handleHotelPress = (hotelName, hotelId) => {
-    navigation.navigate("EditHotelScreen", { hotelName, hotelId });
+  const handleEditHotel = (hotelId, hotelName) => {
+    navigation.navigate("EditHotelScreen", { hotelId, hotelName });
+  };
+
+  const handleGuests = (hotelId) => {
+    navigation.navigate("GuestsScreen", { hotelId });
   };
 
   const renderHotelItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.hotelItem}
-      onPress={() => handleHotelPress(item.name, item.id)}
-    >
-      <Text style={styles.hotelName}>{item.name}</Text>
-      <Text style={styles.hotelCity}>{item.city}</Text>
-    </TouchableOpacity>
+    <View style={styles.hotelItemContainer}>
+      <View style={styles.hotelItem}>
+        {item.image ? (
+          <Image source={{ uri: item.image }} style={styles.hotelPhoto} />
+        ) : (
+          <Text>Loading...</Text>
+        )}
+        <Text style={styles.hotelName}>{item.name}</Text>
+        <Text style={styles.hotelCity}>{item.city}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => handleEditHotel(item.id, item.name)}
+          >
+            <Text style={styles.editButtonText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.guestsButton}
+            onPress={() => handleGuests(item.id)}
+          >
+            <Text style={styles.deleteButtonText}>My Guests</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => handleDeleteHotel(item.id)}
+          >
+            <Text style={styles.deleteButtonText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 
   const handleAddHotel = () => {

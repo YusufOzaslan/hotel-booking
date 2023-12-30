@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
+  imageContaoner: {
+    marginBottom: 50,
+    marginTop: 30,
+    alignItems: "center",
+  },
 });
 
 export default styles;

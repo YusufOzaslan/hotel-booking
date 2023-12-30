@@ -116,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
     navigation.setOptions({
       headerShown: true,
       headerLeft: () => null,
-      title: "Oteller",
+      title: "Hotels",
       headerStyle: {
         backgroundColor: "#2F4F4F",
         borderBottomColor: "transparent",
@@ -139,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
                 clearButtonMode="always"
                 value={search}
                 onChangeText={(searchText) => handleSearch(searchText)}
-                placeholder="Otel veya Şehir Ara"
+                placeholder="Search Hotel or City"
                 autoFocus={true}
                 style={styles.searchBarInput}
               />

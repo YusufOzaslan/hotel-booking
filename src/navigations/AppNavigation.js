@@ -15,6 +15,7 @@ import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
 import AddRoomScreen from "../screens/AddRoom/AddRoomScreen";
 import EditHotelScreen from "../screens/EditHotel/EditHotelScreen";
 import EditRoomScreen from "../screens/EditRoom/EditRoomScreen";
+import GuestsScreen from "../screens/Guests/GuestsScreen";
 import SignUp from "../screens/SignUp/SignUp";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
@@ -210,6 +211,16 @@ const ManageHotelLayout = () => {
         component={EditRoomScreen}
         options={{
           title: "Edit Hotel Room",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="GuestsScreen"
+        component={GuestsScreen}
+        options={{
+          title: "My Guests",
           headerStyle: {
             backgroundColor: "#2F4F4F",
           },

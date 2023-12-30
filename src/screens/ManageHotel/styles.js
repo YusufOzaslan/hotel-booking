@@ -3,59 +3,75 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#333333",
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#fff", // Başlık rengi eklendi
-  },
-  searchBarContainer: {
-    backgroundColor: "#fff",
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 20,
-    width: "80%",
-  },
-  searchBarInput: {
-    backgroundColor: "#fff",
-    paddingHorizontal: 20,
-  },
-  hotelItem: {
-    backgroundColor: "#fff",
-    padding: 20,
-    marginVertical: 8,
-    borderRadius: 10,
-  },
-  hotelName: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  hotelCity: {
-    fontSize: 16,
-  },
-  input: {
-    backgroundColor: "#fff",
-    padding: 15,
-    marginVertical: 10,
-    borderRadius: 10,
-    width: "80%",
+    backgroundColor: "#F5F5F5",
   },
   addButton: {
     backgroundColor: "#2F4F4F",
     padding: 15,
-    borderRadius: 10,
-    marginTop: 10,
-    width: "80%",
+    borderRadius: 8,
+    margin: 16,
     alignItems: "center",
   },
   addButtonLabel: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  hotelItemContainer: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    elevation: 3,
+  },
+  hotelItem: {
+    padding: 16,
+  },
+  hotelPhoto: {
+    width: "100%",
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  hotelName: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  hotelCity: {
+    fontSize: 16,
+    color: "#555555",
+    marginBottom: 8,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 8,
+  },
+  editButton: {
+    backgroundColor: "#4CAF50",
+    padding: 8,
+    borderRadius: 4,
+    marginRight: 8,
+  },
+  editButtonText: {
+    color: "#FFFFFF",
+  },
+  deleteButton: {
+    backgroundColor: "#FF5733",
+    padding: 8,
+    borderRadius: 4,
+  },
+  deleteButtonText: {
+    color: "#FFFFFF",
+  },
+  guestsButton: {
+    backgroundColor: "#3498db",
+    padding: 8,
+    borderRadius: 4,
+  },
+  guestsButtonText: {
+    color: "#FFFFFF",
   },
 });
 
