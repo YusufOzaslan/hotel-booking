@@ -12,10 +12,8 @@ import LoginScreen from "../screens/Login/LoginScreen";
 import HotelScreen from "../screens/Hotel/HotelScreen";
 import RoomScreen from "../screens/Room/RoomScreen";
 import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
-import AddRoomScreen from "../screens/AddRoom/AddRoomScreen";
 import EditHotelScreen from "../screens/EditHotel/EditHotelScreen";
 import EditRoomScreen from "../screens/EditRoom/EditRoomScreen";
-import GuestsScreen from "../screens/Guests/GuestsScreen";
 import SignUp from "../screens/SignUp/SignUp";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
@@ -62,9 +60,11 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: "#1a1a1a",
+          backgroundColor: "#f8fafb",
           borderBottomColor: "transparent",
+          borderTopColor: "transparent",  // Üst kenarlık çizgisi kaldırıldı
           shadowColor: "transparent",
+          
         },
       }}
     >
@@ -75,7 +75,7 @@ const TabNavigator = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Fontisto name="home" size={24} color="#2F4F4F" />
+              <Fontisto name="home" size={30} color="#0e53b2" />
             ) : (
               <SimpleLineIcons name="home" size={24} color="#2F4F4F" />
             ),
@@ -89,7 +89,7 @@ const TabNavigator = () => {
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <FontAwesome5 name="hotel" size={24} color="#2F4F4F" />
+                <FontAwesome5 name="hotel" size={30} color="#0e53b2" />
               ) : (
                 <Fontisto name="hotel" size={24} color="#2F4F4F" />
               ),
@@ -103,7 +103,7 @@ const TabNavigator = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Ionicons name="person" size={24} color="#2F4F4F" />
+              <Ionicons name="person" size={30} color="#0e53b2" />
             ) : (
               <Ionicons name="person-outline" size={24} color="#2F4F4F" />
             ),
@@ -190,16 +190,6 @@ const ManageHotelLayout = () => {
         }}
       />
       <ManageHotelStack.Screen
-        name="AddRoomScreen"
-        component={AddRoomScreen}
-        options={{
-          title: "Add New Room",
-          headerStyle: {
-            backgroundColor: "#2F4F4F",
-          },
-        }}
-      />
-      <ManageHotelStack.Screen
         name="EditHotelScreen"
         component={EditHotelScreen}
         options={{
@@ -210,17 +200,7 @@ const ManageHotelLayout = () => {
         name="EditRoomScreen"
         component={EditRoomScreen}
         options={{
-          title: "Edit Hotel Room",
-          headerStyle: {
-            backgroundColor: "#2F4F4F",
-          },
-        }}
-      />
-      <ManageHotelStack.Screen
-        name="GuestsScreen"
-        component={GuestsScreen}
-        options={{
-          title: "My Guests",
+          title: "Edit Hotel room",
           headerStyle: {
             backgroundColor: "#2F4F4F",
           },

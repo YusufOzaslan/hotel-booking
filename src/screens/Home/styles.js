@@ -1,55 +1,65 @@
-// newStyles.js
-
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
   },
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "#FFFFFF",
   },
   searchBarContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#fff",
     padding: 10,
     marginVertical: 10,
     borderRadius: 20,
-    width: "80%",
+    width: "80%", 
   },
   searchBarInput: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#fff",
     paddingHorizontal: 20,
   },
   hotelItem: {
-    backgroundColor: "#FFFFFF",
+    // Otellerin listelendiği öğelerin stili
+    //backgroundColor: "#e6eaed",
     padding: 20,
     marginVertical: 8,
-    borderRadius: 10,
+    //borderRadius: 10,
+    width: '100%',
+    //alignItems: 'center', justifyContent: 'center',
+
+    //marginVertical: 8,
+    //marginHorizontal: 16,
+    backgroundColor: "#FFFFFF",
+   borderRadius: 15,
     elevation: 3,
   },
-  hotelPhoto: {
+  hotelName: {
+    marginTop:15,
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  hotelCity: {
+    marginTop:5,
+    fontSize: 18,
+  },
+  flatListContainer: {
+    width: '80%',
+  },
+  hotelImage: {
+    backgroundColor: "#fff",
+    //padding: 15,
+    marginVertical: 5,
+    borderRadius: 25,
+  },
+  hotelPhoto:{
     width: "100%",
     height: 200,
     borderRadius: 8,
     marginBottom: 8,
-  },
-  hotelName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#2F4F4F",
-    marginBottom: 8,
-  },
-  hotelCity: {
-    fontSize: 16,
-    color: "#555555",
-    marginBottom: 8,
-  },
+  }
 });
-
 export default styles;

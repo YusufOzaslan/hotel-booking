@@ -92,11 +92,13 @@ const HomeScreen = ({ navigation }) => {
       style={styles.hotelItem}
       onPress={() => handleHotelPress(item.name, item.id)}
     >
-      <View>
+      <View style={styles.hotelImage}>
         {item.image ? (
           <Image
-            style={{ width: 200, height: 200 }}
+            //style={{ width: 200, height: 200 }}
+            style={styles.hotelPhoto}
             source={{ uri: item.image }}
+            
           />
         ) : (
           <Text>Loading...</Text>
@@ -118,9 +120,15 @@ const HomeScreen = ({ navigation }) => {
       headerLeft: () => null,
       title: "Hotels",
       headerStyle: {
-        backgroundColor: "#2F4F4F",
+        backgroundColor: "#0e53b2",
         borderBottomColor: "transparent",
         shadowColor: "transparent",
+      },
+      headerTitleStyle: {
+        fontSize: 28, // İstediğiniz büyüklükte bir değer
+        color: "#fff", // Başlığın rengi
+        fontWeight: 500, // Kalınlık (normal, bold, etc.)
+        marginLeft: 25, // Başlığı sağa kaydır
       },
     });
   });
@@ -141,9 +149,11 @@ const HomeScreen = ({ navigation }) => {
                 onChangeText={(searchText) => handleSearch(searchText)}
                 placeholder="Search Hotel or City"
                 autoFocus={true}
-                style={styles.searchBarInput}
+                style={[styles.searchBarInput, { fontSize: 18 }]} // Placeholder metni için boyut belirleme
+                
               />
             </View>
+            <View style={styles.flatListContainer}>
             <FlatList
               data={hotels}
               renderItem={renderHotelItem}
@@ -152,6 +162,7 @@ const HomeScreen = ({ navigation }) => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
             />
+            </View>
           </>
         )}
       </SafeAreaView>
