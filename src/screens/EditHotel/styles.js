@@ -7,46 +7,65 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333333",
   },
-  roomItem: {
-    padding: 16,
+  roomItemContainer: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC",
   },
-  roomDescription: {
+  roomItem: {
+    flexDirection: "column",
+  },
+  roomPhoto: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+    marginBottom: 10,
+  },
+  roomName: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 8,
     color: "#FFFFFF",
+  },
+  roomDescription: {
+    fontSize: 16,
+    color: "#CCCCCC",
   },
   roomPrice: {
     fontSize: 16,
     color: "#CCCCCC",
+    marginBottom: 10,
   },
-  deleteRoomButton: {
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  editButton: {
+    backgroundColor: "#4285F4",
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 8,
+    alignItems: "center",
+  },
+  editButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  deleteButton: {
     backgroundColor: "#FF0000",
     padding: 10,
     borderRadius: 8,
     marginTop: 8,
+    marginLeft: 10,
     alignItems: "center",
   },
-  deleteRoomButtonLabel: {
+  deleteButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "bold",
   },
-  editRoomButton: {
-    backgroundColor: "#4285F4", // Örnek renk, istediğiniz renge değiştirebilirsiniz
-    padding: 10,
-    borderRadius: 8,
-    marginTop: 8,
-    alignItems: "center",
-  },
-  editRoomButtonLabel: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  addRoomButton: {
+  addButton: {
     backgroundColor: "#4CAF50",
     padding: 15,
     borderRadius: 10,
@@ -54,7 +73,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignItems: "center",
   },
-  addRoomButtonLabel: {
+  addButtonLabel: {
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "bold",

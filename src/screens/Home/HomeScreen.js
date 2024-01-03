@@ -24,7 +24,6 @@ const HomeScreen = ({ navigation }) => {
   const [hotels, setHotels] = useState([]);
   const [search, setSearch] = useState("");
   const [fullHotelsData, setFullHotelsData] = useState([]);
-  const [imageURL, setImageURL] = useState(null);
 
   useEffect(() => {
     fetchHotels();

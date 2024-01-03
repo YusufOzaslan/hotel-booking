@@ -5,10 +5,12 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { auth, db } from "../../../firebase";
+import { ref, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../../firebase";
 import styles from "./styles";
 
 const HotelScreen = ({ navigation, route }) => {
@@ -32,19 +34,26 @@ const HotelScreen = ({ navigation, route }) => {
 
         const querySnapshot = await getDocs(roomsQuery);
 
-        const roomList = [];
+        const roomList = await Promise.all(
+          querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const imageRef = ref(storage, data.imageUrl);
 
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          roomList.push({
-            id: doc.id,
-            description: data.description,
-            price: data.price,
-            roomName: data.roomName,
-            // Diğer oda özelliklerini ekleyebilirsiniz
-          });
-        });
-
+            try {
+              const imageURL = await getDownloadURL(imageRef);
+              return {
+                id: doc.id,
+                description: data.description,
+                price: data.price,
+                roomName: data.roomName,
+                image: imageURL,
+              };
+            } catch (error) {
+              console.log("Error fetching image: ", error);
+              return null; // Eğer resim alınamazsa null döndür
+            }
+          })
+        );
         setRooms(roomList);
         setIsLoading(false);
       } catch (error) {
@@ -90,7 +99,14 @@ const HotelScreen = ({ navigation, route }) => {
                 });
               }}
             >
-            <Text style={styles.roomDescription}>{item.roomName}</Text>
+              {item.image && (
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.roomImage}
+                  resizeMode="cover"
+                />
+              )}
+              <Text style={styles.roomDescription}>{item.roomName}</Text>
               <Text style={styles.roomDescription}>{item.description}</Text>
               <Text style={styles.roomPrice}>Price: {item.price}</Text>
             </TouchableOpacity>

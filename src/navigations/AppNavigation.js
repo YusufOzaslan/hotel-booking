@@ -12,6 +12,8 @@ import LoginScreen from "../screens/Login/LoginScreen";
 import HotelScreen from "../screens/Hotel/HotelScreen";
 import RoomScreen from "../screens/Room/RoomScreen";
 import AddHotelScreen from "../screens/AddHotel/AddHotelScreen";
+import GuestsScreen from "../screens/Guests/GuestsScreen";
+import AddRoomScreen from "../screens/AddRoom/AddRoomScreen";
 import EditHotelScreen from "../screens/EditHotel/EditHotelScreen";
 import EditRoomScreen from "../screens/EditRoom/EditRoomScreen";
 import SignUp from "../screens/SignUp/SignUp";
@@ -62,9 +64,8 @@ const TabNavigator = () => {
         tabBarStyle: {
           backgroundColor: "#f8fafb",
           borderBottomColor: "transparent",
-          borderTopColor: "transparent",  // Üst kenarlık çizgisi kaldırıldı
+          borderTopColor: "transparent", // Üst kenarlık çizgisi kaldırıldı
           shadowColor: "transparent",
-          
         },
       }}
     >
@@ -200,6 +201,27 @@ const ManageHotelLayout = () => {
         name="EditRoomScreen"
         component={EditRoomScreen}
         options={{
+          title: "Edit Hotel room",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="AddRoomScreen"
+        component={AddRoomScreen}
+        options={{
+          title: "Add New Room",
+          headerStyle: {
+            backgroundColor: "#2F4F4F",
+          },
+        }}
+      />
+      <ManageHotelStack.Screen
+        name="GuestsScreen"
+        component={GuestsScreen}
+        options={{
+          title: "My Guests",
           title: "Edit Hotel room",
           headerStyle: {
             backgroundColor: "#2F4F4F",

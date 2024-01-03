@@ -10,6 +10,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC",
     backgroundColor: "#444444", // Oda öğesi arkaplan rengi
+    marginBottom: 16,
+    borderRadius: 8,
+  },
+  roomImage: {
+    width: "100%",
+    height: 200,
+    marginBottom: 8,
+    borderRadius: 8, // İsteğe bağlı: Köşeleri yuvarlatmak için
   },
   roomDescription: {
     fontSize: 18,

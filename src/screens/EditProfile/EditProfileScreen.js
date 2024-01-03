@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, TextInput, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
@@ -10,6 +10,34 @@ const EditProfileScreen = ({ navigation }) => {
   const [surname, setSurname] = useState("");
   const [address, setAddress] = useState("");
 
+  // Kullanıcının mevcut bilgilerini getirme
+  const fetchUserData = async () => {
+    try {
+      const userId = auth.currentUser.uid;
+      const userQuery = query(
+        collection(db, "users"),
+        where("userId", "==", userId)
+      );
+      const querySnapshot = await getDocs(userQuery);
+
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        // Mevcut bilgileri kullanarak giriş alanlarını doldur
+        setName(userData.name);
+        setSurname(userData.surname);
+        setAddress(userData.address);
+      } else {
+        console.log("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData(); // Sayfa yüklendiğinde kullanıcı bilgilerini getir
+  }, []); // Boş bağımlılık dizisi, sadece bir kere çalışması için
+
   const handleSaveChanges = async () => {
     try {
       const userId = auth.currentUser.uid;
@@ -20,28 +48,21 @@ const EditProfileScreen = ({ navigation }) => {
       const querySnapshot = await getDocs(userQuery);
 
       if (!querySnapshot.empty) {
-        // Sadece ilk belgeyi al
         const userDoc = querySnapshot.docs[0];
-
-        // Mevcut belge verilerini al
         const userData = userDoc.data();
-
-        // Güncellenmiş verileri belgeye ekle
         const updatedUser = {
           ...userData,
-          name: name || userData.name, // Eğer yeni bir değer girilmediyse mevcut değeri kullan
+          name: name || userData.name,
           surname: surname || userData.surname,
           address: address || userData.address,
         };
 
-        // Kullanıcı belgesini güncelle
         const userDocRef = doc(collection(db, "users"), userDoc.id);
         updateDoc(userDocRef, updatedUser);
 
-        // Opsiyonel: İşlem tamamlandıktan sonra başka bir ekrana yönlendirme
         navigation.goBack();
       } else {
-        // Kullanıcı bulunamadı, gerekirse bir işlem yapabilirsiniz
+        console.log("User not found");
       }
     } catch (error) {
       console.error("Error updating user:", error);
