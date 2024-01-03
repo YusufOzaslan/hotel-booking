@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, TextInput, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { TouchableOpacity, Text, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, View } from "react-native";
 import { collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
 import styles from "./styles";
@@ -73,30 +73,33 @@ const EditProfileScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView style={styles.keyboardAvoiding}>
-          <Text style={styles.headerText}>Save Changes</Text>
+          <Text style={styles.headerText}>My Membership Information</Text>
           <TextInput
             placeholder="Ad"
-            placeholderTextColor="#BEBEBE"
+            placeholderTextColor="#C0C0C0"
             value={name}
             onChangeText={setName}
             style={styles.input}
           />
           <TextInput
             placeholder="Soyad"
-            placeholderTextColor="#BEBEBE"
+            placeholderTextColor="#C0C0C0"
             value={surname}
             onChangeText={setSurname}
             style={styles.input}
           />
           <TextInput
             placeholder="Adres"
-            placeholderTextColor="#BEBEBE"
+            placeholderTextColor="#C0C0C0"
             value={address}
             onChangeText={setAddress}
             style={styles.input}
           />
-
-          <Button title="Save Changes" onPress={handleSaveChanges} color="#0F2F0F" />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={handleSaveChanges} style={styles.button}>
+              <Text style={styles.buttonText}>Save Changes</Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>

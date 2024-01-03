@@ -91,13 +91,11 @@ const HomeScreen = ({ navigation }) => {
       style={styles.hotelItem}
       onPress={() => handleHotelPress(item.name, item.id)}
     >
-      <View style={styles.hotelImage}>
+      <View>
         {item.image ? (
           <Image
-            //style={{ width: 200, height: 200 }}
             style={styles.hotelPhoto}
             source={{ uri: item.image }}
-            
           />
         ) : (
           <Text>Loading...</Text>
@@ -149,7 +147,6 @@ const HomeScreen = ({ navigation }) => {
                 placeholder="Search Hotel or City"
                 autoFocus={true}
                 style={[styles.searchBarInput, { fontSize: 18 }]} // Placeholder metni için boyut belirleme
-                
               />
             </View>
             <View style={styles.flatListContainer}>

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
   },
   buttonContainer: {
     flex: 1,
@@ -13,15 +13,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#2F4F4F",
-    padding: 10,
+    justifyContent: "center",
+    backgroundColor: "#0e53b2",
     margin: 10,
-    borderRadius: 5,
-    width: 200,
+    borderRadius: 25,
+    width: 300,
+    height: 70
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
   },

@@ -12,9 +12,15 @@ const ProfileScreen = ({ navigation }) => {
       headerLeft: () => null,
       title: "My Profile",
       headerStyle: {
-        backgroundColor: "#2F4F4F",
+        backgroundColor: "#0e53b2",
         borderBottomColor: "transparent",
         shadowColor: "transparent",
+      },
+      headerTitleStyle: {
+        fontSize: 28, // İstediğiniz büyüklükte bir değer
+        color: "#fff", // Başlığın rengi
+        fontWeight: 500, // Kalınlık (normal, bold, etc.)
+        marginLeft: 25, // Başlığı sağa kaydır
       },
     });
   });
