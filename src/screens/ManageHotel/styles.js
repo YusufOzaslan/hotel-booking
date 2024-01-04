@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
   },
   addButton: {
-    backgroundColor: "#2F4F4F",
+    backgroundColor: "#0e53b2",
     padding: 15,
     borderRadius: 8,
     margin: 16,
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   addButtonLabel: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
   },
   hotelItemContainer: {
