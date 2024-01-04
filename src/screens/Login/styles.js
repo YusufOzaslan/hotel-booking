@@ -1,5 +1,3 @@
-// styles.js
-
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -7,26 +5,73 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#111111",
+    backgroundColor: "#f8fafb",
   },
   keyboardAvoiding: {
     flex: 1,
     justifyContent: "center",
   },
-  title: {
-    fontSize: 32,
+  helloTitle: {
+    fontSize: 130,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#333333",
+    textAlign: "center",
+  },
+  title: {
+    fontSize: 33,
+    color: "#333333",
     marginBottom: 20,
     textAlign: "center",
   },
   input: {
     height: 50,
-    borderWidth: 1,
     borderRadius: 4,
     padding: 10,
+    backgroundColor: "#f8fafb",
+    fontSize: 18,
+  },
+  inputContainer: {
+    borderBottomWidth: 1, // Yalnızca alt kısmına çizgi eklemek için
+    borderBottomColor: '#B0B0B0',
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    marginHorizontal: 20,
     marginVertical: 10,
-    backgroundColor: "#ffffff",
+  },
+  loginButton:{
+    backgroundColor: '#0e53b2', 
+    borderColor: '#0e53b2', // Çerçeve rengi
+    borderWidth: 1.2, // Çerçeve kalınlığı
+    borderRadius: 20, // Kenar yuvarlaklığı
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginBottom:15,
+  },
+  loginButtonText:{
+    color: '#fff', // Yazı rengi
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  signUpButton:{
+    backgroundColor: 'white',
+    borderColor: '#0e53b2', // Çerçeve rengi
+    borderWidth: 1.2, // Çerçeve kalınlığı
+    borderRadius: 20, // Kenar yuvarlaklığı
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+  },
+  signUpButtonText:{
+    color: '#0e53b2', // Yazı rengi
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  separator: {
+    height: 10,
   },
 });
 

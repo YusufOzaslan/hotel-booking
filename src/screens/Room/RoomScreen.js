@@ -8,11 +8,13 @@ import {
   TextInput,
   Button,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import DatePicker from "react-native-date-ranges";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { collection, doc, getDoc, addDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebase";
+import { ref, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../../firebase";
 import styles from "./styles";
 
 const RoomScreen = ({ navigation, route }) => {
@@ -40,14 +42,20 @@ const RoomScreen = ({ navigation, route }) => {
       try {
         setIsLoading(true);
 
-        const roomDoc = await getDoc(doc(db, "rooms", roomId));
+        const querySnapshot = await getDoc(doc(db, "rooms", roomId));
 
-        if (roomDoc.exists()) {
-          const roomData = roomDoc.data();
+        if (querySnapshot.exists()) {
+          const roomData = querySnapshot.data();
+
+          const imageRef = await ref(storage, roomData.imageUrl);
+          const imageURL = await getDownloadURL(imageRef);
+
           const roomF = {
-            id: roomDoc.id,
+            id: querySnapshot.id,
+            roomName: roomData.roomName,
             description: roomData.description,
             price: roomData.price,
+            image: imageURL,
           };
 
           setRoom([roomF]);
@@ -129,7 +137,19 @@ const RoomScreen = ({ navigation, route }) => {
             data={room}
             renderItem={({ item }) => (
               <View style={styles.roomItem}>
-                <Text style={styles.roomDescription}>{item.description}</Text>
+                {item.image && (
+                  <Image
+                    source={{ uri: item.image }}
+                    style={styles.roomImage}
+                    resizeMode="cover"
+                  />
+                )}
+                <Text style={styles.roomDescription}>
+                  Room: {item.roomName}
+                </Text>
+                <Text style={styles.roomDescription}>
+                  Description: {item.description}
+                </Text>
                 <Text style={styles.roomPrice}>Price: {item.price}</Text>
                 <TouchableOpacity onPress={() => handleBookNow(item)}>
                   <Text style={styles.bookNowButton}>Book Now</Text>

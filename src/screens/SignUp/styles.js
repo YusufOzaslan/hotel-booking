@@ -5,32 +5,62 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#111111",
+    backgroundColor: "#f8fafb",
   },
   keyboardAvoiding: {
     flex: 1,
     justifyContent: "center",
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "white",
-  },
-  title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#ffffff",
     marginBottom: 20,
-    textAlign: "center",
+    color: "#333333",
   },
   input: {
     height: 50,
-    borderWidth: 1,
     borderRadius: 4,
     padding: 10,
+    backgroundColor: "#f8fafb",
+    fontSize: 18,
+  },
+  inputContainer: {
+    borderBottomWidth: 1, // Yalnızca alt kısmına çizgi eklemek için
+    borderBottomColor: '#B0B0B0',
+    marginBottom: 20,
+  },
+  pickerInputContainer:{
+    borderRadius:15,
+    backgroundColor: "#ebf3f2",
     marginVertical: 10,
-    backgroundColor: "#ffffff",
+    justifyContent: "center",
+  },
+  pickerInput:{
+    height: 50,
+  },
+  pickerItem: {
+    fontSize: 18, // İstediğiniz büyüklükte ayarlayabilirsiniz
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  signUpButton:{
+    backgroundColor: '#0e53b2', 
+    borderColor: '#0e53b2', // Çerçeve rengi
+    borderWidth: 1.2, // Çerçeve kalınlığı
+    borderRadius: 20, // Kenar yuvarlaklığı
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginBottom:15,
+  },
+  signUpButtonText:{
+    color: '#fff', // Yazı rengi
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
 

@@ -3,15 +3,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
   },
   roomItem: {
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCCCCC",
-    backgroundColor: "#444444", // Oda öğesi arkaplan rengi
+    margin:20,
+    backgroundColor: "#fff", // Oda öğesi arkaplan rengi
     marginBottom: 16,
-    borderRadius: 8,
+    borderRadius: 12,
+    elevation:3.5,
   },
   roomImage: {
     width: "100%",
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
-    color: "#FFFFFF", // Açıklama rengi
+    color: "#333333", // Açıklama rengi
   },
   roomPrice: {
     fontSize: 16,
-    color: "#CCCCCC", // Fiyat rengi
+    color: "#0F2F0F", // Fiyat rengi
   },
 });
 

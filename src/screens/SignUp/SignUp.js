@@ -1,18 +1,16 @@
 import React from "react";
 import {
   Text,
+  View,
   TextInput,
-  Button,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import styles from "./styles";
@@ -43,29 +41,41 @@ const SignUp = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView style={styles.keyboardAvoiding}>
           <Text style={styles.headerText}>Sign Up</Text>
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor="#BEBEBE"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor="#BEBEBE"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-          />
-          <Picker
-            selectedValue={role}
-            onValueChange={(itemValue) => setRole(itemValue)}
-            style={styles.input}
-          >
-            <Picker.Item key="guest" label="Guest" value="guest" />
-            <Picker.Item key="hotelOwner" label="Hotel Owner" value="hotelOwner" />
-          </Picker>
-          <Button title="Sign Up" onPress={signUp} color="#0F2F0F" />
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor="#BEBEBE"
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor="#BEBEBE"
+              value={password}
+              onChangeText={setPassword}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.pickerInputContainer}>
+            <Picker
+              selectedValue={role}
+              onValueChange={(itemValue) => setRole(itemValue)}
+              style={styles.pickerInput}
+            >
+              <Picker.Item key="guest" label="Guest" value="guest" style={styles.pickerItem}/>
+              <Picker.Item key="hotelOwner" label="Hotel Owner" value="hotelOwner" style={styles.pickerItem}/>
+            </Picker>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={signUp} style={styles.signUpButton}>
+              <Text style={styles.signUpButtonText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+          
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>

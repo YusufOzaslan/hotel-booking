@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import {
-  View,
   Text,
   TouchableOpacity,
   FlatList,
@@ -10,7 +9,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
-import { auth, db, storage } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 import styles from "./styles";
 
 const HotelScreen = ({ navigation, route }) => {
@@ -72,9 +71,15 @@ const HotelScreen = ({ navigation, route }) => {
       headerShown: true,
       title: hotelName,
       headerStyle: {
-        backgroundColor: "#2F4F4F",
+        backgroundColor: "#0e53b2",
         borderBottomColor: "transparent",
         shadowColor: "transparent",
+      },
+      headerTitleStyle: {
+        fontSize: 28, // İstediğiniz büyüklükte bir değer
+        color: "#fff", // Başlığın rengi
+        fontWeight: 500, // Kalınlık (normal, bold, etc.)
+        marginLeft: 5, // Başlığı sağa kaydır
       },
     });
   }, [navigation, hotelName]);
