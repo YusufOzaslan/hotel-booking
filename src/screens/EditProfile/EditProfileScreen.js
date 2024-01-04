@@ -6,9 +6,9 @@ import { auth, db } from "../../../firebase";
 import styles from "./styles";
 
 const EditProfileScreen = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [address, setAddress] = useState("");
+  const [name, setName] = useState("name");
+  const [surname, setSurname] = useState("surname");
+  const [address, setAddress] = useState("address");
 
   // Kullanıcının mevcut bilgilerini getirme
   const fetchUserData = async () => {

@@ -78,7 +78,11 @@ const GuestsScreen = ({ navigation, route }) => {
             <View style={styles.reservationItem}>
               <Text style={styles.titleText}>Hotel: {item.hotelName}</Text>
               <Text style={styles.infoText}>Room: {item.roomName}</Text>
-              <Text style={styles.infoText}>Date: {item.date}</Text>
+              <Text style={styles.infoText}>Check-in date: {item.startDate}</Text>
+              <Text style={styles.infoText}>check-out date: {item.endDate}</Text>
+              <Text style={styles.infoText}>Customer name: {item.name}</Text>
+              <Text style={styles.infoText}>Customer last name: {item.lastName}</Text>
+              <Text style={styles.infoText}>Phone Number: {item.phoneNumber}</Text>
               <View style={styles.deleteButtonContainer}>
                 <TouchableOpacity
                   onPress={() => handleDeleteReservation(item.id)}
