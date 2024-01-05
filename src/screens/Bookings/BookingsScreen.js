@@ -19,7 +19,7 @@ import {
 import { db, auth } from "../../../firebase";
 import styles from "./styles";
 
-const AccommodationScreen = ({ navigation }) => {
+const BookingsScreen = ({ navigation }) => {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -96,4 +96,4 @@ const AccommodationScreen = ({ navigation }) => {
   );
 };
 
-export default AccommodationScreen;
+export default BookingsScreen;

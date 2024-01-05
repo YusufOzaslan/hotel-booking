@@ -29,7 +29,7 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   const goToBookings = () => {
-    navigation.navigate("AccommodationScreen");
+    navigation.navigate("BookingsScreen");
   };
 
   const logout = () => {
@@ -46,7 +46,7 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={goToBookings}>
-          <Text style={styles.buttonText}>Accommodation</Text>
+          <Text style={styles.buttonText}>Bookings</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={logout}>

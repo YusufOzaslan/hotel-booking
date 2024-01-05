@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import ProfileScreen from "../screens/Profile/ProfileScreen";
 import EditProfileScreen from "../screens/EditProfile/EditProfileScreen";
-import AccommodationScreen from "../screens/Accommodation/AccommodationScreen";
+import BookingsScreen from "../screens/Bookings/BookingsScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import ManageHotelScreen from "../screens/ManageHotel/ManageHotelScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
@@ -70,7 +70,7 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeLayout}
         options={{
           headerShown: false,
@@ -284,18 +284,18 @@ const ProfileLayout = () => {
             shadowColor: "transparent",
           },
           headerTitleStyle: {
-            fontSize: 28, // İstediğiniz büyüklükte bir değer
-            color: "#fff", // Başlığın rengi
-            fontWeight: 500, // Kalınlık (normal, bold, etc.)
-            marginLeft: 5, // Başlığı sağa kaydır
+            fontSize: 28,
+            color: "#fff",
+            fontWeight: 500,
+            marginLeft: 5,
           },
         }}
       />
       <ProfileStack.Screen
-        name="AccommodationScreen"
-        component={AccommodationScreen}
+        name="BookingsScreen"
+        component={BookingsScreen}
         options={{
-          title: "Accommodation",
+          title: "Bookings",
           headerStyle: {
             backgroundColor: "#0e53b2",
           },
