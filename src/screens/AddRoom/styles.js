@@ -3,41 +3,52 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
   },
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
-    color: "#FFFFFF",
+    marginBottom: 14,
+    marginLeft: "6%",
+  },
+  inputContainer: {
+    borderBottomWidth: 1, // Yalnızca alt kısmına çizgi eklemek için
+    borderBottomColor: '#B0B0B0',
+    marginLeft: "6%", // Çizginin sol tarafında yüzde 10 boşluk
+    marginRight: "6%", // Çizginin sağ tarafında yüzde 10 boşluk
+    paddingVertical:1,
   },
   input: {
-    width: "80%",
-    height: 40,
-    borderColor: "#CCCCCC",
-    borderWidth: 1,
-    marginBottom: 16,
+    height: 50,
+    borderRadius: 4,
     padding: 8,
-    borderRadius: 8,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f8fafb",
+    fontSize: 18,
   },
   addButton: {
     backgroundColor: "#4285F4",
     padding: 10,
     borderRadius: 8,
-    marginBottom: 16,
+    width:"100%",
+  },
+  addRoomButton:{
+    backgroundColor: "#4CAF50",
+    padding: 10,
+    borderRadius: 8,
+    width:"100%",
   },
   addButtonLabel: {
     color: "#FFFFFF",
     fontSize: 16,
     textAlign: "center",
   },
-  imageContaoner: {
-    marginBottom: 50,
-    marginTop: 30,
+  imageContainer: {
+    marginBottom: 10,
+    marginTop: 10,
     alignItems: "center",
+  },
+  butonContainer:{
+    padding:22,
   },
 });
 

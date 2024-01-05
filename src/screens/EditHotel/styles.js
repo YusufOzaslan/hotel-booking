@@ -4,8 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
   },
   roomItemContainer: {
     paddingVertical: 10,
@@ -18,22 +17,22 @@ const styles = StyleSheet.create({
   },
   roomPhoto: {
     width: "100%",
-    height: 200,
+    height: 220,
     resizeMode: "cover",
     marginBottom: 10,
   },
   roomName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#FFFFFF",
   },
   roomDescription: {
     fontSize: 16,
-    color: "#CCCCCC",
+    color: "#0F2F0F",
+    paddingVertical: 8,
   },
   roomPrice: {
     fontSize: 16,
-    color: "#CCCCCC",
+    color: "#0F2F0F",
     marginBottom: 10,
   },
   buttonContainer: {
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 8,
     alignItems: "center",
+    width: 90,
   },
   editButtonText: {
     color: "#FFFFFF",
@@ -59,11 +59,15 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 10,
     alignItems: "center",
+    width: 90,
   },
   deleteButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  addButtonContainer: {
+    alignItems: "center",
   },
   addButton: {
     backgroundColor: "#4CAF50",

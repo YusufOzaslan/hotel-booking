@@ -194,7 +194,15 @@ const ManageHotelLayout = () => {
         options={{
           title: "Add Hotel",
           headerStyle: {
-            backgroundColor: "#2F4F4F",
+            backgroundColor: "#0e53b2",
+            borderBottomColor: "transparent",
+            shadowColor: "transparent",
+          },
+          headerTitleStyle: {
+            fontSize: 28, // İstediğiniz büyüklükte bir değer
+            color: "#fff", // Başlığın rengi
+            fontWeight: 500, // Kalınlık (normal, bold, etc.)
+            marginLeft: 5, // Başlığı sağa kaydır
           },
         }}
       />
@@ -211,7 +219,7 @@ const ManageHotelLayout = () => {
         options={{
           title: "Edit Hotel room",
           headerStyle: {
-            backgroundColor: "#2F4F4F",
+            backgroundColor: "#0e53b2",
           },
         }}
       />
@@ -221,7 +229,15 @@ const ManageHotelLayout = () => {
         options={{
           title: "Add New Room",
           headerStyle: {
-            backgroundColor: "#2F4F4F",
+            backgroundColor: "#0e53b2",
+            borderBottomColor: "transparent",
+            shadowColor: "transparent",
+          },
+          headerTitleStyle: {
+            fontSize: 28, // İstediğiniz büyüklükte bir değer
+            color: "#fff", // Başlığın rengi
+            fontWeight: 500, // Kalınlık (normal, bold, etc.)
+            marginLeft: 5, // Başlığı sağa kaydır
           },
         }}
       />
@@ -230,9 +246,16 @@ const ManageHotelLayout = () => {
         component={GuestsScreen}
         options={{
           title: "My Guests",
-          title: "Edit Hotel room",
           headerStyle: {
-            backgroundColor: "#2F4F4F",
+            backgroundColor: "#0e53b2",
+            borderBottomColor: "transparent",
+            shadowColor: "transparent",
+          },
+          headerTitleStyle: {
+            fontSize: 28, // İstediğiniz büyüklükte bir değer
+            color: "#fff", // Başlığın rengi
+            fontWeight: 500, // Kalınlık (normal, bold, etc.)
+            marginLeft: 5, // Başlığı sağa kaydır
           },
         }}
       />

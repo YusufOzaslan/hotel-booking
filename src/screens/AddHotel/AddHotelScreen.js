@@ -120,33 +120,45 @@ const AddHotelScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
+
         <Text style={styles.headerText}>Add New Hotel</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Hotel Name"
-          value={hotelName}
-          onChangeText={(text) => setHotelName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="City"
-          value={city}
-          onChangeText={(text) => setCity(text)}
-        />
-        <TouchableOpacity style={styles.addButton} onPress={handlePickImage}>
-          <Text style={styles.addButtonLabel}>Pick an Image</Text>
-        </TouchableOpacity>
-        {image && (
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Hotel Name"
+            value={hotelName}
+            onChangeText={(text) => setHotelName(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="City"
+            value={city}
+            onChangeText={(text) => setCity(text)}
+          />
+        </View>
+
+
+        <View style={styles.butonContainer}>
+          <TouchableOpacity style={styles.addButton} onPress={handlePickImage}>
+            <Text style={styles.addButtonLabel}>Pick an Image</Text>
+          </TouchableOpacity>
+
           <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: image }}
-              style={{ width: 300, height: 200 }}
-            />
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: "100%", height: 220 }}
+              />
+            )}
           </View>
-        )}
-        <TouchableOpacity style={styles.addButton} onPress={handleAddHotel}>
-          <Text style={styles.addButtonLabel}>Add Hotel</Text>
-        </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.addHotelButton} onPress={handleAddHotel}>
+            <Text style={styles.addButtonLabel}>Add Hotel</Text>
+          </TouchableOpacity>
+        </View>
+
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

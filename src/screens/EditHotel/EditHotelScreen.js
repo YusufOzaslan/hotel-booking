@@ -109,9 +109,14 @@ const EditHotelScreen = ({ navigation, route }) => {
       headerShown: true,
       title: "Manage " + hotelName,
       headerStyle: {
-        backgroundColor: "#2F4F4F",
+        backgroundColor: "#0e53b2",
         borderBottomColor: "transparent",
         shadowColor: "transparent",
+      },
+      headerTitleStyle: {
+        fontSize: 26, // İstediğiniz büyüklükte bir değer
+        color: "#fff", // Başlığın rengi
+        fontWeight: 500, // Kalınlık (normal, bold, etc.)
       },
     });
   }, [navigation, hotelName]);
@@ -150,9 +155,12 @@ const EditHotelScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.addButtonContainer}>
       <TouchableOpacity style={styles.addButton} onPress={handleAddRoom}>
         <Text style={styles.addButtonLabel}>Add Room</Text>
       </TouchableOpacity>
+      </View>
+     
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (

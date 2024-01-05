@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     width: '80%',
+    height:"88%",
   },
   hotelPhoto: {
     width: "100%",

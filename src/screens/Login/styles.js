@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   helloTitle: {
-    fontSize: 130,
+    fontSize: 100,
     fontWeight: "bold",
     color: "#333333",
     textAlign: "center",
   },
   title: {
-    fontSize: 33,
+    fontSize: 25,
     color: "#333333",
     marginBottom: 20,
     textAlign: "center",

@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
   saveButtonLabel: {
     color: "#fff",
     fontSize: 19,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: "#4CAF50",
-    padding: 10,
+    padding: 9,
     borderRadius: 10,
     textAlign: 'center',
-    paddingLeft: 35,
-    paddingRight: 35,
+    paddingLeft: 30,
+    paddingRight: 30,
   },
   roomContainer:{
     backgroundColor: "#fff",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   titleText:{
     padding: 10,
-    fontSize: 22,
+    fontSize: 19,
     fontWeight: 'bold',
     borderColor: "#333333",
   },

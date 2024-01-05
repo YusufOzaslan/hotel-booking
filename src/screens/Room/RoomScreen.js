@@ -78,9 +78,14 @@ const RoomScreen = ({ navigation, route }) => {
       headerShown: true,
       title: hotelName + ": " + roomName,
       headerStyle: {
-        backgroundColor: "#2F4F4F",
+        backgroundColor: "#0e53b2",
         borderBottomColor: "transparent",
         shadowColor: "transparent",
+      },
+      headerTitleStyle: {
+        fontSize: 26, // İstediğiniz büyüklükte bir değer
+        color: "#fff", // Başlığın rengi
+        fontWeight: 500, // Kalınlık (normal, bold, etc.)
       },
     });
   }, [navigation, hotelName]);
@@ -133,31 +138,34 @@ const RoomScreen = ({ navigation, route }) => {
         <ActivityIndicator size="large" />
       ) : (
         <>
-          <FlatList
-            data={room}
-            renderItem={({ item }) => (
-              <View style={styles.roomItem}>
-                {item.image && (
-                  <Image
-                    source={{ uri: item.image }}
-                    style={styles.roomImage}
-                    resizeMode="cover"
-                  />
-                )}
-                <Text style={styles.roomDescription}>
-                  Room: {item.roomName}
-                </Text>
-                <Text style={styles.roomDescription}>
-                  Description: {item.description}
-                </Text>
-                <Text style={styles.roomPrice}>Price: {item.price}</Text>
-                <TouchableOpacity onPress={() => handleBookNow(item)}>
-                  <Text style={styles.bookNowButton}>Book Now</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={(item) => item.id}
-          />
+          <View style={styles.flatContainer}>
+            <FlatList
+              data={room}
+              renderItem={({ item }) => (
+                <View style={styles.roomItem}>
+                  {item.image && (
+                    <Image
+                      source={{ uri: item.image }}
+                      style={styles.roomImage}
+                      resizeMode="cover"
+                    />
+                  )}
+                  <Text style={styles.roomDescription}>
+                    Room: {item.roomName}
+                  </Text>
+                  <Text style={styles.roomDescription}>
+                    Description: {item.description}
+                  </Text>
+                  <Text style={styles.roomPrice}>Price: {item.price}</Text>
+                  <TouchableOpacity onPress={() => handleBookNow(item)}>
+                    <Text style={styles.bookNowButton}>Book Now</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+
 
           <Modal
             animationType="slide"

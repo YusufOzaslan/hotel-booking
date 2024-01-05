@@ -49,29 +49,40 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   editButton: {
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#4CAF50",
     padding: 8,
     borderRadius: 4,
-    marginRight: 8,
+    width: 85,
   },
   editButtonText: {
     color: "#FFFFFF",
+    fontSize: 16,
   },
   deleteButton: {
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#FF5733",
     padding: 8,
     borderRadius: 4,
+    width: 85,
   },
   deleteButtonText: {
     color: "#FFFFFF",
+    fontSize: 16,
   },
   guestsButton: {
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#3498db",
     padding: 8,
     borderRadius: 4,
+    width: 95,
   },
   guestsButtonText: {
     color: "#FFFFFF",
+    fontSize: 16,
   },
 });
 

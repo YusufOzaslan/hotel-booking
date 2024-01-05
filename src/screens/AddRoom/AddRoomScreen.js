@@ -36,14 +36,12 @@ const AddRoomScreen = ({ navigation, route }) => {
       setImage(result.assets[0].uri);
     }
   };
-
   const uploadImage = async () => {
     if (!image) {
       // Eğer resim seçilmediyse, işlemi sonlandır
       Alert.alert("Warning", "Please pick an image before uploading.");
       return;
     }
-
     setUploading(true);
     try {
       const { uri } = await FileSystem.getInfoAsync(image);
@@ -95,13 +93,10 @@ const AddRoomScreen = ({ navigation, route }) => {
             price: price,
             imageUrl: downloadURL,
           };
-
           try {
             await addDoc(collection(db, "rooms"), newRoom);
-
             // Oda başarıyla eklendikten sonra kullanıcıya bilgi vermek için Alert kullanımı
             Alert.alert("Success", "New room added successfully!");
-
             navigation.goBack();
           } catch (error) {
             console.error("Error adding room: ", error);
@@ -113,7 +108,6 @@ const AddRoomScreen = ({ navigation, route }) => {
       setUploading(false);
     }
   };
-
   const handleAddRoom = async () => {
     uploadImage();
   };
@@ -121,40 +115,52 @@ const AddRoomScreen = ({ navigation, route }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
+
         <Text style={styles.headerText}>Add New Room</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Room Name"
-          value={roomName}
-          onChangeText={(text) => setRoomName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Room Description"
-          value={description}
-          onChangeText={(text) => setDescription(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Price"
-          value={price}
-          onChangeText={(text) => setPrice(text)}
-          keyboardType="numeric"
-        />
-        <TouchableOpacity style={styles.addButton} onPress={pickImage}>
-          <Text style={styles.addButtonLabel}>Pick an Image</Text>
-        </TouchableOpacity>
-        <View style={styles.imageContainer}>
-          {image && (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 300, height: 300 }}
-            />
-          )}
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Room Name"
+            value={roomName}
+            onChangeText={(text) => setRoomName(text)}
+          />
         </View>
-        <TouchableOpacity style={styles.addButton} onPress={handleAddRoom}>
-          <Text style={styles.addButtonLabel}>Add Room</Text>
-        </TouchableOpacity>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Room Description"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Price"
+            value={price}
+            onChangeText={(text) => setPrice(text)}
+            keyboardType="numeric"
+          />
+        </View>
+
+        <View style={styles.butonContainer}>
+          <TouchableOpacity style={styles.addButton} onPress={pickImage}>
+            <Text style={styles.addButtonLabel}>Pick an Image</Text>
+          </TouchableOpacity>
+          <View style={styles.imageContainer}>
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width:"100%", height: 220 }}
+              />
+            )}
+          </View>
+          <TouchableOpacity style={styles.addRoomButton} onPress={handleAddRoom}>
+            <Text style={styles.addButtonLabel}>Add Room</Text>
+          </TouchableOpacity>
+        </View>
+
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

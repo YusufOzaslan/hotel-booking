@@ -3,24 +3,28 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#333333",
+    backgroundColor: "#f8fafb",
+  },
+  flatContainer:{
+    width:"100%",
   },
   roomItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCCCCC",
+    padding: 20,
+    margin:20,
+    backgroundColor: "#ebf3f2",
+    borderRadius: 15,
+    elevation:5,
   },
   roomDescription: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
-    color: "#fff",
+    //color: "#fff",
   },
   roomPrice: {
     fontSize: 16,
-    color: "#fff",
+    //color: "#fff",
   },
   bookNowButton: {
     fontSize: 16,
