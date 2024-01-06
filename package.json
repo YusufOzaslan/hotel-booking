@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-firebase/app": "^18.7.3",
     "@react-native-firebase/storage": "^18.7.3",
     "@react-native-picker/picker": "2.4.10",
@@ -17,6 +18,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
     "expo": "~49.0.15",
+    "expo-file-system": "~15.4.5",
     "expo-image-picker": "~14.3.2",
     "expo-sqlite": "~11.3.3",
     "expo-status-bar": "~1.6.0",
@@ -27,8 +29,7 @@
     "react-native-date-ranges": "^2.5.0",
     "react-native-modern-datepicker": "^1.0.0-beta.91",
     "react-native-sqlite-storage": "^6.0.1",
-    "react-native-vector-icons": "^10.0.2",
-    "expo-file-system": "~15.4.5"
+    "react-native-vector-icons": "^10.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
