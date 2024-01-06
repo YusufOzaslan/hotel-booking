@@ -32,8 +32,10 @@ const AddRoomScreen = ({ navigation, route }) => {
       aspect: [4, 3],
       quality: 1,
     });
-    if (!result.cancelled) {
-      setImage(result.assets[0].uri);
+
+    if (!result.canceled) {
+      const selectedImage = result.assets[0];
+      setImage(selectedImage.uri);
     }
   };
   const uploadImage = async () => {
@@ -115,7 +117,6 @@ const AddRoomScreen = ({ navigation, route }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-
         <Text style={styles.headerText}>Add New Room</Text>
 
         <View style={styles.inputContainer}>
@@ -152,15 +153,17 @@ const AddRoomScreen = ({ navigation, route }) => {
             {image && (
               <Image
                 source={{ uri: image }}
-                style={{ width:"100%", height: 220 }}
+                style={{ width: "100%", height: 220 }}
               />
             )}
           </View>
-          <TouchableOpacity style={styles.addRoomButton} onPress={handleAddRoom}>
+          <TouchableOpacity
+            style={styles.addRoomButton}
+            onPress={handleAddRoom}
+          >
             <Text style={styles.addButtonLabel}>Add Room</Text>
           </TouchableOpacity>
         </View>
-
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

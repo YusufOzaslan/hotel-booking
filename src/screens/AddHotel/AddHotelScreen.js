@@ -31,8 +31,9 @@ const AddHotelScreen = ({ navigation }) => {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setImage(result.uri);
+    if (!result.canceled) {
+      const selectedImage = result.assets[0];
+      setImage(selectedImage.uri);
     }
   };
 
